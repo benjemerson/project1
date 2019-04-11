@@ -2,7 +2,6 @@
 
 //function declaration
 char movingTheAlphabet(char x, int locksmith);
-char movingTheAlphabetBack(char x, int locksmith);
 
 //char theAlphabetButDifferentEncode(char x);
 //char theAlphabetButDifferentEncode(char x);
@@ -10,51 +9,46 @@ char movingTheAlphabetBack(char x, int locksmith);
 int main() {
     // variables
     int c;               //count for loop
-    char godDamnEnglishAlphabet[27] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};   //array for alphabet
-    char sentence[100] = "AVHYBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+    //char godDamnEnglishAlphabet[27] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};   //array for alphabet
+    char sentence[1000];    
     
-    // scanf("%s", sentence);    
-    FILE *input;
-    FILE *output;
-    input = fopen("input.txt", "r");
-    output = fopen("output.txt", "w");
+    //file input and output
+    FILE *input;        //points to the input file
+    FILE *output;       //points to the output file
+    input = fopen("input.txt", "r");        //tells the compiler to read input.txt
+    output = fopen("output.txt", "w");      //tells compiler to write to output.txt
     
-    fscanf(input, "%[^\n]s", sentence);
-    fprintf(output, "%s\n", sentence);
+    fscanf(input, "%[^\n]s", sentence);     //reads everything including whitspace in input
+    fprintf(output, "%s\n", sentence);      //prints original sentence to output
+    
     //main code
-    printf("%s\n", sentence);
-    for (c = 0; sentence[c] != '\0'; c++) {
-        
-       sentence[c]= movingTheAlphabet(sentence[c], 1);
-           // pritning the function of array
+    for (c = 0; sentence[c] != '\0'; c++) {     // quits loop when reached null or \0
+       sentence[c]= movingTheAlphabet(sentence[c], 26);    //gives letters to the function for encode/decode
     }
-    printf("%s", sentence);  
-    fprintf(output, "%s", sentence);
+    
+    printf("%s", sentence);         //prints translated/encoded string to std output
+    fprintf(output, "%s", sentence);        //prints translated/encoded string to output.txt
+    
   return 0;
 }
 
 //function definitions
 
-//rotation decode algorithm
-char movingTheAlphabetBack(char x, int locksmith) {
-    char shiftyMcShifted;
-    int positron;
-    if ((x >= 65)){              //if ascii number is A or more
-        positron = x - 65;       //minus 65 for the position in the array
-        shiftyMcShifted = (positron + 26 - locksmith)%26 + 65;      //converting back to ascii
-        }
-    return shiftyMcShifted;       //returns new  for new letter
-}
-
-
-//rotation encode algorithm
+//rotation encode/decode algorithm
 char movingTheAlphabet(char x, int locksmith) {
     char shiftyMcShifted;
     int positron;
-    if ((x >= 65)){              //if ascii number is A or more
-        positron = x - 65;       //minus 65 for the position in the array
+    if ((x >= 65) && (x < 90)){              //if ascii number is A or more
+        positron = x - 65;           //minus 65 for the position in the array
         shiftyMcShifted = (positron + locksmith)%26 + 65;      //converting back to ascii
     }   
+    else if (x < 65){
+        shiftyMcShifted = x;
+    }
+    else if (x >= 97) {             
+        positron = x - 97;       //minus 65 for the position in the array
+        shiftyMcShifted = (positron + locksmith)%26 + 97;      //converting back to ascii
+    }
     return shiftyMcShifted;       //returns new ascii for new letter
 }
 
