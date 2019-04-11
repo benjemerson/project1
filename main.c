@@ -14,19 +14,22 @@ int main() {
     char sentence[100] = "AVHYBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
     
     // scanf("%s", sentence);    
-    /*FILE *input;
-    input = fopen("Input.txt", "r");
-    while (feof(input) == 0) {
-        char i;
-        fscanf(input, "%c", &i);
-        printf("%c", i);
-    }*/
+    FILE *input;
+    FILE *output;
+    input = fopen("input.txt", "r");
+    output = fopen("output.txt", "w");
+    
+    fscanf(input, "%[^\n]s", sentence);
+    fprintf(output, "%s\n", sentence);
     //main code
+    printf("%s\n", sentence);
     for (c = 0; sentence[c] != '\0'; c++) {
         
        sentence[c]= movingTheAlphabet(sentence[c], 1);
            // pritning the function of array
-    }printf("%s", sentence);  
+    }
+    printf("%s", sentence);  
+    fprintf(output, "%s", sentence);
   return 0;
 }
 
