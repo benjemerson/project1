@@ -11,18 +11,22 @@ int main() {
     // variables
     int c;               //count for loop
     char godDamnEnglishAlphabet[27] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};   //array for alphabet
+    char sentence[100] = "AVHYBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
     
-    FILE *input;
+    // scanf("%s", sentence);    
+    /*FILE *input;
     input = fopen("Input.txt", "r");
     while (feof(input) == 0) {
         char i;
         fscanf(input, "%c", &i);
         printf("%c", i);
-    }
+    }*/
     //main code
-    for (c = 0; c < 26; c++) {
-        printf("%c ", movingTheAlphabet(godDamnEnglishAlphabet[c], 2));     // pritning the function of array
-    }
+    for (c = 0; sentence[c] != '\0'; c++) {
+        
+       sentence[c]= movingTheAlphabet(sentence[c], 1);
+           // pritning the function of array
+    }printf("%s", sentence);  
   return 0;
 }
 
@@ -34,10 +38,8 @@ char movingTheAlphabetBack(char x, int locksmith) {
     int positron;
     if ((x >= 65)){              //if ascii number is A or more
         positron = x - 65;       //minus 65 for the position in the array
-        if (0 <= 26) {           //position for array
-            shiftyMcShifted = (positron + 26 - locksmith)%26 + 65;      //converting back to ascii
+        shiftyMcShifted = (positron + 26 - locksmith)%26 + 65;      //converting back to ascii
         }
-    }   
     return shiftyMcShifted;       //returns new  for new letter
 }
 
@@ -48,9 +50,7 @@ char movingTheAlphabet(char x, int locksmith) {
     int positron;
     if ((x >= 65)){              //if ascii number is A or more
         positron = x - 65;       //minus 65 for the position in the array
-        if (0 <= 26) {           //position for array
-            shiftyMcShifted = (positron + locksmith)%26 + 65;      //converting back to ascii
-        }
+        shiftyMcShifted = (positron + locksmith)%26 + 65;      //converting back to ascii
     }   
     return shiftyMcShifted;       //returns new ascii for new letter
 }
