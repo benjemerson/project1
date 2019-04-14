@@ -3,13 +3,12 @@
 //function declaration
 char movingTheAlphabet(char x, int locksmith);
 
-//char theAlphabetButDifferentEncode(char x);
-//char theAlphabetButDifferentEncode(char x);
+//char theAlphabetButDifferentDecode(char x);
+char theAlphabetButDifferentEncode(char x);
 
 int main() {
     // variables
     int c;               //count for loop
-    //char godDamnEnglishAlphabet[27] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};   //array for alphabet
     char sentence[1000];    
     
     //file input and output
@@ -18,13 +17,15 @@ int main() {
     input = fopen("input.txt", "r");        //tells the compiler to read input.txt
     output = fopen("output.txt", "w");      //tells compiler to write to output.txt
     
-    fscanf(input, "%[^\n]s", sentence);     //reads everything including whitspace in input
+    fscanf(input, "%[^\n]s", sentence);     //reads everything including whitespace in input
     fprintf(output, "%s\n", sentence);      //prints original sentence to output
     
     //main code
     for (c = 0; sentence[c] != '\0'; c++) {     // quits loop when reached null or \0
-       sentence[c]= movingTheAlphabet(sentence[c], 26);    //gives letters to the function for encode/decode
+       //sentence[c]= movingTheAlphabet(sentence[c], 19);    //gives letters to the function for encode/decode     
+        sentence[c] = theAlphabetButDifferentEncode(sentence[c]);
     }
+    
     
     printf("%s", sentence);         //prints translated/encoded string to std output
     fprintf(output, "%s", sentence);        //prints translated/encoded string to output.txt
@@ -38,7 +39,7 @@ int main() {
 char movingTheAlphabet(char x, int locksmith) {
     char shiftyMcShifted;
     int positron;
-    if ((x >= 65) && (x < 90)){              //if ascii number is A or more
+    if ((x >= 65) && (x <= 90)){              //if ascii number is A or more
         positron = x - 65;           //minus 65 for the position in the array
         shiftyMcShifted = (positron + locksmith)%26 + 65;      //converting back to ascii
     }   
@@ -53,17 +54,27 @@ char movingTheAlphabet(char x, int locksmith) {
 }
 
 //substitution decode algorithm
-/*char theAlphabetButDifferentEncode(char x) {
+char theAlphabetButDifferentEncode(char x) {
+    char godDamnEnglishAlphabet[27] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};   //array for alphabet
     char codedAlphabet[27] = {"ZAQWSXCDERFVBGTYHNMJUIKLOP"};    //cipher for substitution
-    int betItsSubstituted, count, secondCount;
+    char sentence[x];
+    int i, j;
     
-    for (count = 0; count < x; count++) {
-        for (secondCount = 0; secondCount < 25;secondCount++) {
-            if codedAlphabet[count] = 
-        }
-    }
-    return betItsSubstituted;
-}*/
+    printf("%c", x);
+    
+    sentence[x] = godDamnEnglishAlphabet[x];
+    
+    
+    //for (i = 0; sentence[x] != '\0'; i++) {
+        //for (j = 0; j < 25; j++) {
+            //if (codedAlphabet[j] == sentence[x]) {
+              //  sentence[x] = godDamnEnglishAlphabet[j];
+                //printf("%s", sentence);
+           // }
+       // }
+   // }
+    return sentence;
+}
 
 //substitution encode algorithm
 //char theAlphabetButDifferentEncode(char x) {
